@@ -1,0 +1,6 @@
+---
+- name: Installing commons package
+  block:
+    - name: MySQL package for Ubuntu
+      include_tasks: common/dependencies-ubuntu.yaml
+      when: ansible_facts['distribution'] == 'Ubuntu'
