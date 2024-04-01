@@ -1,10 +1,10 @@
 galaxy_info:
   author: dimmaryanto93
-  role_name: ndb_postgres_image
+  role_name: nutanix_db-patch-os
   description: Install docker-compose for linux
   company: PT. Tabeldata Informatika
 
-  issue_tracker_url: https://github.com/dimMaryanto93/ansible-role-ndb-postgres-image/issues
+  issue_tracker_url: https://github.com/dimMaryanto93/ndb_os_patch/issues
 
   license: MIT
 
@@ -17,12 +17,15 @@ galaxy_info:
   - name: EL
     versions:
     - "7"
+    - "8"
+  - name: Ubuntu
+    versions: 
+    - "focal"
 
   galaxy_tags:
     - nutanix
     - database
     - ndb
-    - postgresql
 
 dependencies: []
   # List your role dependencies here, one per line. Be sure to remove the '[]' above,

@@ -1,6 +1,29 @@
 ---
-- name: Installing commons package
+- name: Installing commons packages
   block:
-    - name: MySQL package for Ubuntu
-      include_tasks: common/dependencies-ubuntu.yaml
-      when: ansible_facts['distribution'] == 'Ubuntu'
+    - name: Install python binnary
+      package:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - python36
+        - python36-devel
+        - wget
+        - zip
+        - unzip
+        - curl
+        - gcc
+        - rsync
+        - rpcbind
+        - showmount
+
+    - name: Install epel-release for RedHat
+      when: ansible_os_family == 'RedHat'
+      yum:
+        name: epel-release
+        state: present
+
+    - name: Install python package manager
+      package:
+        name: python3-pip
+        state: present
