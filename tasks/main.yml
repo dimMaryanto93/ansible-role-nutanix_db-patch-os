@@ -1,4 +1,30 @@
 ---
+- name: Setup era user drive
+  block:
+    - name: create group of user era
+      ansible.builtin.group:
+        name: "{{ era_group | default('era') }}"
+        state: present
+
+    - name: create user for era user
+      ansible.builtin.user:
+        name: "{{ era_username | default('era') }}"
+        comment: ERA User drive
+        uid: 3000
+        group: "{{ era_group | default('era') }}"
+        create_home: true
+        home: "{{ era_home_path | default('/home/era') }}"
+        update_password: on_create
+        password: "{{ era_password | default('nutanix/4u') }}"
+    
+    - name: Make users passwordless for sudo in user era
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: "^{{ era_username | default('era') }}"
+        line: "{{ era_username | default('era') }} ALL=(ALL) NOPASSWD: ALL"
+        validate: 'visudo -cf %s'
+    
 - name: Installing commons packages
   block:
     - name: Install python binnary
@@ -16,6 +42,9 @@
         - rsync
         - rpcbind
         - showmount
+        - iptables
+        - readline-devel
+        - zlib-devel
 
     - name: Install epel-release for RedHat
       when: ansible_os_family == 'RedHat'
@@ -27,3 +56,26 @@
       package:
         name: python3-pip
         state: present
+
+    - name: Update pip engine to at least 
+      pip:
+        executable: pip3
+        state: present
+        name: pip>=21.3.1
+
+    - name: Check pip version
+      register: pip_version
+      command:
+        cmd: pip3 --version
+
+    - name: debug pip version
+      debug:
+        msg: "{{ pip_version.stdout }}"
+
+    - name: Install NFS package
+      package:
+        name: "{{ item }}"
+        state: present
+      loop: 
+        - rpcbind
+        - showmount

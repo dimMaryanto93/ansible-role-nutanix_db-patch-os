@@ -1,1 +1,1 @@
-localhost   ansible_port=22     ansible_user=admin    ansible_host=localhost
+ndb_vm   ansible_port=22     ansible_user=admin    ansible_host=10.12.11.221
