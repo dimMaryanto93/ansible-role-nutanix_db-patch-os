@@ -14,8 +14,12 @@
         group: "{{ era_group | default('era') }}"
         create_home: true
         home: "{{ era_home_path | default('/home/era') }}"
-        update_password: on_create
-        password: "{{ era_password | default('nutanix/4u') }}"
+
+    - name: Change password for era drive user
+      user:
+        name: "{{ era_username | default('era') }}"
+        update_password: always
+        password: "{{ era_password | password_hash('sha512') }}"
     
     - name: Make users passwordless for sudo in user era
       lineinfile:
