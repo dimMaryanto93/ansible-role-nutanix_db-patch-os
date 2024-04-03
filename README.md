@@ -1,9 +1,19 @@
-`dimmaryanto93.ndb_postgres_image`
+`dimmaryanto93.nutanix_db-patch-os`
 =========
 
-Support platform
+Provision VM image for Nutanix Database especily hardening
 
-- CentOS
+- Create user and grour (era drive)
+- Install commons requiremment packages such as `nfs`, `curl`, `pip package manager` etc.
+- Install test script to validate/verify software match the requirement of Nutanix Database (NDB) formally ERA
+
+Platform support 
+
+- CentOS 7
+- OracleLinux 8.7
+- Ubuntu 20.04
+
+for more please checkout the [documentation](https://portal.nutanix.com/page/documents/details?targetId=Release-Notes-Nutanix-NDB-v2_5_4:v25-ndb-compatibility-general-ndb-2_5_3-r.html)
 
 Requirements
 ------------
@@ -33,7 +43,6 @@ Ada beberapa variable yang temen-temen bisa gunakan untuk setting docker daemon,
 
 | Variable name                           | Example value | Description |
 | :---                                    | :---          | :---        |
-| `containerd.architecture`               | `amd64`       |             |
 
 
 Example Playbook
@@ -45,7 +54,7 @@ Including an example of how to use your role (for instance, with variables passe
 - hosts: servers
   become: true
   roles:
-      - { role: dimmaryanto93.ndb_postgres_image }
+      - { role: dimmaryanto93.nutanix_db-patch-os }
 ```
 
 License

@@ -1,6 +1,0 @@
----
-- name: Provision image PostgreSQL for NDB
-  hosts: all
-  become: true
-  roles: 
-    - ./

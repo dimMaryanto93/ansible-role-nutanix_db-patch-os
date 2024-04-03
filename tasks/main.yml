@@ -79,3 +79,23 @@
       loop: 
         - rpcbind
         - showmount
+
+- name: Upload files era_linux_prechecks
+  block:
+  - name: Create a directory ==> /opt/ndb if it does not exist 
+    ansible.builtin.file:
+      path: "/opt/ndb"
+      state: directory
+      mode: '7777'
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+  - name: Copy file era_linux_prechecks.sh to server
+    copy:
+      src: "files/era_linux_prechecks.sh"
+      dest: "/opt/ndb/era_linux_prechecks.sh"
+    when: ansible_system == 'Linux'
+  - name: Copy file era_windows_prechecks.sh to server
+    copy:
+      src: "files/era_windows_prechecks.ps1"
+      dest: "era_windows_prechecks.ps1"
+    when: ansible_system == 'Windows'

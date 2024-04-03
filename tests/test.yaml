@@ -3,4 +3,4 @@
   hosts: ['all']
   become: true
   roles: 
-    - ../../ansible-role-ndb-hardening
+    - ../../ansible-role-nutanix_db-patch-os
