@@ -60,27 +60,20 @@
       yum:
         name: epel-release
         state: present
-
     - name: Install python package manager
       package:
         name: python3-pip
         state: present
-
-    - name: Update pip engine to at least 
-      pip:
-        executable: pip3
-        state: present
-        name: pip>=21.3.1
-
+    - name: Update pip engine to specific version 
+      command:
+        cmd: pip3 install --upgrade pip
     - name: Check pip version
       register: pip_version
       command:
         cmd: pip3 --version
-
     - name: debug pip version
       debug:
         msg: "{{ pip_version.stdout }}"
-
     - name: Install NFS package
       package:
         name: "{{ item }}"
