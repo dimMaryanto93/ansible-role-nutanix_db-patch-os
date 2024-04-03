@@ -93,6 +93,9 @@
     copy:
       src: "files/era_linux_prechecks.sh"
       dest: "/opt/ndb/era_linux_prechecks.sh"
+      mode: '7777'
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
     when: ansible_system == 'Linux'
   - name: Copy file era_windows_prechecks.sh to server
     copy:
