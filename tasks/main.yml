@@ -45,6 +45,11 @@
         - iptables
         - readline-devel
         - zlib-devel
+        - gcc
+        - bc
+        - sshpass
+        - ksh
+        - lsof
 
     - name: Install epel-release for RedHat
       when: ansible_os_family == 'RedHat'
