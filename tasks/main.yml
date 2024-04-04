@@ -23,8 +23,12 @@
         group: "{{ era_group | default('era') }}"
         create_home: true
         home: "{{ era_home_path | default('/home/era') }}"
-        update_password: on_create
-        password: "{{ era_password | default('nutanix/4u') }}"
+
+    - name: Change password for era drive user
+      user:
+        name: "{{ era_username | default('era') }}"
+        update_password: always
+        password: "{{ era_password | password_hash('sha512') }}"
     
     - name: Make users passwordless for sudo in user era
       lineinfile:
@@ -47,27 +51,20 @@
       yum:
         name: epel-release
         state: present
-
     - name: Install python package manager
       package:
         name: python3-pip
         state: present
-
-    - name: Update pip engine to at least 
-      pip:
-        executable: pip3
-        state: present
-        name: pip>=21.3.1
-
+    - name: Update pip engine to specific version 
+      command:
+        cmd: pip3 install --upgrade pip
     - name: Check pip version
       register: pip_version
       command:
         cmd: pip3 --version
-
     - name: debug pip version
       debug:
         msg: "{{ pip_version.stdout }}"
-
     - name: Install NFS package
       package:
         name: "{{ item }}"
