@@ -1,4 +1,13 @@
 ---
+- name: Load a variable file based on the OS type
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - '{{ ansible_distribution }}-{{ ansible_distribution_major_version }}-dependencies.yaml'
+      paths:
+        - 'vars'
+
 - name: Setup era user drive
   block:
     - name: create group of user era
@@ -31,25 +40,7 @@
       package:
         name: "{{ item }}"
         state: present
-      loop:
-        - python36
-        - python36-devel
-        - wget
-        - zip
-        - unzip
-        - curl
-        - gcc
-        - rsync
-        - rpcbind
-        - showmount
-        - iptables
-        - readline-devel
-        - zlib-devel
-        - gcc
-        - bc
-        - sshpass
-        - ksh
-        - lsof
+      loop: "{{ common_packages }}"
 
     - name: Install epel-release for RedHat
       when: ansible_os_family == 'RedHat'
@@ -81,9 +72,7 @@
       package:
         name: "{{ item }}"
         state: present
-      loop: 
-        - rpcbind
-        - showmount
+      loop: "{{ nfs_packages }}"
 
 - name: Upload files era_linux_prechecks
   block:

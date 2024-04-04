@@ -1,0 +1,22 @@
+common_packages:
+  - python
+  - python-dev
+  - wget
+  - zip
+  - unzip
+  - curl
+  - gcc
+  - rsync
+  - iptables
+  - gcc
+  - bc
+  - sshpass
+  - ksh
+  - lsof
+  - nftables
+  - ifupdown
+  - net-tools
+  - python[3]*-selinux
+nfs_packages:
+  - nfs-common
+  - rpcbind
