@@ -1,0 +1,21 @@
+common_packages:
+  - python36
+  - python36-devel
+  - wget
+  - zip
+  - unzip
+  - curl
+  - gcc
+  - rsync
+  - iptables
+  - readline-devel
+  - zlib-devel
+  - gcc
+  - bc
+  - sshpass
+  - ksh
+  - lsof
+  - llvm-toolset
+nfs_packages:
+  - rpcbind
+  - showmount
