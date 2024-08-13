@@ -16,6 +16,7 @@ common_packages:
   - ksh
   - lsof
   - llvm-toolset
+  - tar
 nfs_packages:
   - rpcbind
   - showmount

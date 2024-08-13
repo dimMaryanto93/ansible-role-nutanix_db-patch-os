@@ -17,6 +17,7 @@ common_packages:
   - ifupdown
   - net-tools
   - python[3]*-selinux
+  - tar
 nfs_packages:
   - nfs-common
   - rpcbind
