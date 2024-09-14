@@ -17,6 +17,7 @@ common_packages:
   - lsof
   - llvm-toolset
   - tar
+  - iptables-services
 nfs_packages:
   - rpcbind
   - showmount
