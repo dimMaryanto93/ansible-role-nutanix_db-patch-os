@@ -17,6 +17,7 @@ common_packages:
   - lsof
   - llvm-toolset
   - tar
+  - network-scripts
 nfs_packages:
   - rpcbind
   - showmount
